@@ -4,6 +4,8 @@ import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -37,6 +39,7 @@ public class MadMaze {
             int levels = scan.nextInt();
             int rows = scan.nextInt();
             int cols = scan.nextInt();
+
 
             //the start point
             int sLevel = scan.nextInt();
@@ -104,7 +107,60 @@ public class MadMaze {
                 }
             }
 
-            System.out.println(DijkstraShortestPath.findPathBetween(graph, maze[sLevel][sRow][sCol], maze[eLevel][eRow][eCol]));
+            ArrayList<Character> printPath = new ArrayList<>();
+
+            DijkstraShortestPath path = new DijkstraShortestPath(graph, maze[sLevel][sRow][sCol], maze[eLevel][eRow][eCol]);
+            List edgeList = path.getPathEdgeList();
+
+            for(int q = 0; q < edgeList.size(); q++){
+                String stringEdge = edgeList.get(q).toString();
+                stringEdge = stringEdge.substring(1,stringEdge.length() - 1).replaceAll(" ","");
+                String[] split = stringEdge.split(":");
+                int source = Integer.parseInt(split[0]);
+                int target = Integer.parseInt((split[1]));
+                int result = target - source;
+
+                if(result == -1){
+                    printPath.add('W');
+                }
+
+                if(result == 1){
+                    printPath.add('E');
+                }
+
+                if(result == cols * -1){
+                    printPath.add('N');
+                }
+
+                if(result == cols){
+                    printPath.add('S');
+                }
+
+                if(result == rows * cols){
+                    printPath.add('U');
+                }
+
+                if(result == rows * cols * -1){
+                    printPath.add('D');
+                }
+
+            }
+
+            try {
+                for(char c : printPath){
+                    outfile.write(c + " ");
+                }
+                outfile.write('\n');
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+
+        try{
+            outfile.close();
+            scan.close();
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 }
