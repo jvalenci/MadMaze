@@ -51,7 +51,7 @@ public class MadMaze {
             int eRow = scan.nextInt();
             int eCol = scan.nextInt();
 
-            //my graph
+            //my weighted graph
             SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph = new SimpleDirectedWeightedGraph(DefaultWeightedEdge.class);
 
             //init the 3D array and add vertices to graph
