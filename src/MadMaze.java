@@ -23,7 +23,7 @@ public class MadMaze {
 
         //init file for reading and writing
         try {
-            inputfile = new File("input.txt");
+            inputfile = new File(args[0]);
             outputfile = new File("output.txt");
 
             scan = new Scanner(inputfile);
