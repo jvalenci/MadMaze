@@ -1,12 +1,13 @@
-import org.jgrapht.alg.DijkstraShortestPath;
-import org.jgrapht.graph.DefaultWeightedEdge;
-import org.jgrapht.graph.SimpleDirectedWeightedGraph;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import org.jgrapht.alg.DijkstraShortestPath;
+import org.jgrapht.graph.DefaultWeightedEdge;
+import org.jgrapht.graph.SimpleDirectedWeightedGraph;
+
 
 /**
  * Created by jonat on 11/23/2016.
@@ -107,7 +108,7 @@ public class MadMaze {
                 }
             }
 
-            ArrayList<Character> printPath = new ArrayList<>();
+            ArrayList<Character> printPath = new ArrayList<Character>();
 
             DijkstraShortestPath path = new DijkstraShortestPath(graph, maze[sLevel][sRow][sCol], maze[eLevel][eRow][eCol]);
             List edgeList = path.getPathEdgeList();
