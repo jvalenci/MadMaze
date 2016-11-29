@@ -53,11 +53,13 @@ public class MadMaze {
             int sLevel = scan.nextInt();
             int sRow = scan.nextInt();
             int sCol = scan.nextInt();
+            int startPoint = (((sLevel * cols * rows) + 1 ) * (sCol + 1) * (sRow + 1)) -1 ;
 
             //the end point
             int eLevel = scan.nextInt();
             int eRow = scan.nextInt();
             int eCol = scan.nextInt();
+            int endPoint = (((eLevel * cols * rows) + 1 ) * (eCol + 1) * (eRow + 1)) -1;
 
             //my weighted graph
             SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph = new SimpleDirectedWeightedGraph(DefaultWeightedEdge.class);
@@ -76,27 +78,27 @@ public class MadMaze {
                     if (vertNeighbors.charAt(c) == '1') {
                         switch (c) {
                             case 0:
-                                edge = graph.addEdge(maze[j][k][l], maze[j][k - 1][l]);
+                                edge = graph.addEdge(j, j + movingNorth);
                                 graph.setEdgeWeight(edge, 1);
                                 break;
                             case 1:
-                                edge = graph.addEdge(maze[j][k][l], maze[j][k][l + 1]);
+                                edge = graph.addEdge(j, j + movingEast);
                                 graph.setEdgeWeight(edge, 1);
                                 break;
                             case 2:
-                                edge = graph.addEdge(maze[j][k][l], maze[j][k + 1][l]);
+                                edge = graph.addEdge(j, j + movingSouth);
                                 graph.setEdgeWeight(edge, 1);
                                 break;
                             case 3:
-                                edge = graph.addEdge(maze[j][k][l], maze[j][k][l - 1]);
+                                edge = graph.addEdge(j, j + movingWest);
                                 graph.setEdgeWeight(edge, 1);
                                 break;
                             case 4:
-                                edge = graph.addEdge(maze[j][k][l], maze[j + 1][k][l]);
+                                edge = graph.addEdge(j, j + movingUp);
                                 graph.setEdgeWeight(edge, 1);
                                 break;
                             case 5:
-                                edge = graph.addEdge(maze[j][k][l], maze[j - 1][k][l]);
+                                edge = graph.addEdge(j, j + movingDown);
                                 graph.setEdgeWeight(edge, 1);
                                 break;
                         }
@@ -106,7 +108,7 @@ public class MadMaze {
 
             ArrayList<Character> printPath = new ArrayList<Character>();
 
-            DijkstraShortestPath path = new DijkstraShortestPath(graph, maze[sLevel][sRow][sCol], maze[eLevel][eRow][eCol]);
+            DijkstraShortestPath path = new DijkstraShortestPath(graph, startPoint, endPoint);
             List edgeList = path.getPathEdgeList();
 
             for(int q = 0; q < edgeList.size(); q++){
