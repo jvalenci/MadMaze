@@ -36,7 +36,8 @@ public class MadMaze {
         numOfMazes = scan.nextInt();
 
         for ( int i = 0; i < numOfMazes; i++){
-            //read in the dimensions of the 3D array
+
+            //read in the dimensions of the maze
             int levels = scan.nextInt();
             int rows = scan.nextInt();
             int cols = scan.nextInt();
@@ -53,19 +54,18 @@ public class MadMaze {
             int sLevel = scan.nextInt();
             int sRow = scan.nextInt();
             int sCol = scan.nextInt();
-//            int startPoint = ((sLevel * cols * rows) + ((sCol + 1) * (sRow + 1))) -1 ;
             int startPoint = (sLevel * cols * rows) + (sRow * rows) + sCol;
 
             //the end point
             int eLevel = scan.nextInt();
             int eRow = scan.nextInt();
             int eCol = scan.nextInt();
-//            int endPoint = ((eLevel * cols * rows) + ((eCol + 1) * (eRow + 1))) -1;
             int endPoint = (eLevel * cols * rows) + (eRow * rows) + eCol;
+
             //my weighted graph
             SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph = new SimpleDirectedWeightedGraph(DefaultWeightedEdge.class);
 
-            //init vertices to graph
+            //init graph to add vertices
             for(int v = 0; v < numOfVertices; v++) {
                 graph.addVertex(v);
             }
@@ -107,11 +107,16 @@ public class MadMaze {
                 }
             }
 
+            //hold my directions that will print.
             ArrayList<Character> printPath = new ArrayList<Character>();
 
+            //Dijkstra algo
             DijkstraShortestPath path = new DijkstraShortestPath(graph, startPoint, endPoint);
+
+            //list of the edges that make the path
             List edgeList = path.getPathEdgeList();
 
+            //parse the edges to get what direction was taken
             for(int q = 0; q < edgeList.size(); q++){
                 String stringEdge = edgeList.get(q).toString();
                 stringEdge = stringEdge.substring(1,stringEdge.length() - 1).replaceAll(" ","");
@@ -146,6 +151,7 @@ public class MadMaze {
 
             }
 
+            //print out the path
             try {
                 for(char c : printPath){
                     outfile.write(c + " ");
@@ -156,6 +162,7 @@ public class MadMaze {
             }
         }
 
+        //clean up, closing files
         try{
             outfile.close();
             scan.close();
