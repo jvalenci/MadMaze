@@ -53,14 +53,15 @@ public class MadMaze {
             int sLevel = scan.nextInt();
             int sRow = scan.nextInt();
             int sCol = scan.nextInt();
-            int startPoint = ((sLevel * cols * rows) + ((sCol + 1) * (sRow + 1))) -1 ;
+//            int startPoint = ((sLevel * cols * rows) + ((sCol + 1) * (sRow + 1))) -1 ;
+            int startPoint = (sLevel * cols * rows) + (sRow * rows) + sCol;
 
             //the end point
             int eLevel = scan.nextInt();
             int eRow = scan.nextInt();
             int eCol = scan.nextInt();
-            int endPoint = ((eLevel * cols * rows) + ((eCol + 1) * (eRow + 1))) -1;
-
+//            int endPoint = ((eLevel * cols * rows) + ((eCol + 1) * (eRow + 1))) -1;
+            int endPoint = (eLevel * cols * rows) + (eRow * rows) + eCol;
             //my weighted graph
             SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph = new SimpleDirectedWeightedGraph(DefaultWeightedEdge.class);
 
