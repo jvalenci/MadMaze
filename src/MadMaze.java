@@ -53,13 +53,13 @@ public class MadMaze {
             int sLevel = scan.nextInt();
             int sRow = scan.nextInt();
             int sCol = scan.nextInt();
-            int startPoint = (((sLevel * cols * rows) + 1 ) * (sCol + 1) * (sRow + 1)) -1 ;
+            int startPoint = ((sLevel * cols * rows) + ((sCol + 1) * (sRow + 1))) -1 ;
 
             //the end point
             int eLevel = scan.nextInt();
             int eRow = scan.nextInt();
             int eCol = scan.nextInt();
-            int endPoint = (((eLevel * cols * rows) + 1 ) * (eCol + 1) * (eRow + 1)) -1;
+            int endPoint = ((eLevel * cols * rows) + ((eCol + 1) * (eRow + 1))) -1;
 
             //my weighted graph
             SimpleDirectedWeightedGraph<Integer, DefaultWeightedEdge> graph = new SimpleDirectedWeightedGraph(DefaultWeightedEdge.class);
@@ -119,27 +119,27 @@ public class MadMaze {
                 int target = Integer.parseInt((split[1]));
                 int result = target - source;
 
-                if(result == -1){
+                if(result == movingWest){
                     printPath.add('W');
                 }
 
-                if(result == 1){
+                if(result == movingEast){
                     printPath.add('E');
                 }
 
-                if(result == cols * -1){
+                if(result == movingNorth){
                     printPath.add('N');
                 }
 
-                if(result == cols){
+                if(result == movingSouth){
                     printPath.add('S');
                 }
 
-                if(result == rows * cols){
+                if(result == movingUp){
                     printPath.add('U');
                 }
 
-                if(result == rows * cols * -1){
+                if(result == movingDown){
                     printPath.add('D');
                 }
 
