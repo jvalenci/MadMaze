@@ -1,0 +1,5 @@
+<keymap version="1" name="Default copy" parent="$default">
+  <action id="FixDocComment">
+    <keyboard-shortcut first-keystroke="ctrl alt d" />
+  </action>
+</keymap>
